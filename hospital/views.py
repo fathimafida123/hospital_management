@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 # Create your views here.
 def home(request):
     return render(request,"home.html")
@@ -71,3 +71,25 @@ def patients(request):
     }
  
      return render(request,"patients.html",context)
+# def register(request):
+#     print(request.POST)
+#     if request.method=="POST":
+#         username=request.POST["username"]
+#         password=request.POST["pass"]
+#         age=request.POST["age"]
+#         email=request.POST["email"]
+#         print(username,password,age,email)
+#     return render(request,"register.html")
+from django.contrib import messages
+def register(request):
+    print("Request method:", request.method)
+    if request.method=="POST":
+        print(request.POST)
+        name=request.POST="name"
+        password=request.POST="pass"
+        email=request.POST="email"
+        print(email)
+        print(name)
+        messages.success(request,"registration success")
+        # return HttpResponse("your registration is successed")
+    return render(request,"register.html")

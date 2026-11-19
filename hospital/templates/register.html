@@ -1,0 +1,33 @@
+
+<!-- <form method="post">
+    {% csrf_token%}
+    <input type="text" name="username" />
+    <input type="password" name="pass" />
+    <input type="text" name="age" />
+    <input type="email" name="email" />
+    <button>submit</button>
+</form> -->
+
+<html>
+    <head>
+        <title>my webpage</title>
+    </head>
+    <body>
+        <h2>Patiient registration</h2>
+        <form method="post">
+            {% csrf_token %}
+            <p>Name:</p>
+            <input type="text" name="name"/><br><br>
+            <h2>password:</h2>
+            <input type="password" name="pass"/><br><br>
+            <h2>email:</h2>
+            <input type="email" name="email"/><br><br>
+            <button type="submit">Register</button>
+        </form>
+        {%if messages %}
+           {% for message in messages%}
+               {{ message }}
+           {% endfor %}    
+        {% endif %}   
+    </body>
+</html>

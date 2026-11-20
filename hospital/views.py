@@ -85,11 +85,15 @@ def register(request):
     print("Request method:", request.method)
     if request.method=="POST":
         print(request.POST)
-        name=request.POST="name"
-        password=request.POST="pass"
-        email=request.POST="email"
+        name=request.POST.get("name")
+        password=request.POST.get("pass")
+        email=request.POST.get("email")
         print(email)
         print(name)
-        messages.success(request,"registration success")
+        fields=[name,email,password]
+        if not all(fields):
+           messages.error( request,"please fill in all fields!")
+        else:   
+            messages.success(request,"registration success")
         # return HttpResponse("your registration is successed")
     return render(request,"register.html")

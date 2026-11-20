@@ -17,8 +17,8 @@ Including another URLconf
 from django.urls import path
 from . import views
 urlpatterns = [
-    path("",views.home),
-    path("doctors/",views.doctors),
-    path("patients/",views.patients),
+    path("",views.home,name="home"),
+    path("doctors/",views.doctors,name="doctors"),
+    path("patients/",views.patients,name="patients"),
     path("register/",views.register,name="register"),
 ]

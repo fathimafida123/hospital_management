@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 # Create your views here.
 def home(request):
@@ -95,5 +95,6 @@ def register(request):
            messages.error( request,"please fill in all fields!")
         else:   
             messages.success(request,"registration success")
+            return redirect("home")
         # return HttpResponse("your registration is successed")
     return render(request,"register.html")

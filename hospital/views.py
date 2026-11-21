@@ -71,15 +71,17 @@ def patients(request):
     }
  
      return render(request,"patients.html",context)
-# def register(request):
-#     print(request.POST)
-#     if request.method=="POST":
-#         username=request.POST["username"]
-#         password=request.POST["pass"]
-#         age=request.POST["age"]
-#         email=request.POST["email"]
-#         print(username,password,age,email)
-#     return render(request,"register.html")
+def register(request):
+    print(request.POST)
+    if request.method=="POST":
+        username=request.POST["username"]
+        password=request.POST["pass"]
+        age=request.POST["age"]
+        email=request.POST["email"]
+        print(username,password,age,email)
+    return render(request,"register.html")
+
+# here we are collecting directly
 from django.contrib import messages
 def register(request):
     print("Request method:", request.method)
@@ -98,3 +100,37 @@ def register(request):
             return redirect("home")
         # return HttpResponse("your registration is successed")
     return render(request,"register.html")
+
+#usinf forms.py
+from .forms import PatientForm
+from .models import Patient
+# def register(request):
+#     form=PatientForm()
+#     if request.method=="POST":
+#         print(request.POST)
+#     return render(request,"register.html",{"form":form})
+
+def register(request):
+    if request.method=="POST":
+        form=PatientForm(request.POST)
+        if form.is_valid():
+            name=form.cleaned_data["name"]
+            email=form.cleaned_data["email"]
+            age=form.cleaned_data["age"]
+            gender=form.cleaned_data["gender"]
+            Patient.objects.create(
+                name=name,
+                email=email,
+                age=age,
+                gender=gender
+            ) #add to database
+            print(name)
+            print(email)
+            print(age)
+            print(gender)
+            return HttpResponse("successfully registered")
+        else:
+            print(form.errors)
+    else:
+        form=PatientForm()        
+    return render(request,"register.html",{"form":form})    
